@@ -4,14 +4,13 @@
     <div class="slds-grid slds-wrap">
     <div class="slds-col slds-size_4-of-12 slds-m-bottom--medium">
     <lightning-Input type="search" placeholder="Search..." value={contactName} name="contactName" class="contactName" onchange={handleChangeAccName}></lightning-input>
+        <br><br>
     </div>
-    <br/>
+    
     <div class="slds-col slds-size_6-of-12 slds-m-top--medium" style="margin-top: 19px; margin-left: 10px;">
     <lightning-button label="Search For Contact" size="small" variant="brand" onclick={handleContactSearch} icon-name="utility:search" icon-position="right"></lightning-button>
-    </div>
-    <br/>
-    <div class="slds-col slds-size_6-of-12 slds-m-top--medium" style="margin-top: 19px; margin-left: 10px;">
-        <lightning-button label="Show All Contact" size="small" variant="brand" onclick={handleShowAll} icon-name="utility:search" icon-position="right"></lightning-button>
+    <br><br>
+    <lightning-button label="Show All Contact" size="small" variant="brand" onclick={handleShowAll} icon-name="utility:search" icon-position="right"></lightning-button>
     </div>
     </div>
 
