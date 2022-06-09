@@ -15,32 +15,31 @@
     </div>
     </div>
 
-    <template if:true={contactData}>
-    <table class="slds-table slds-table_cell-buffer slds-table_bordered" border="1" cellspacing="0" cellpadding="0" bordercolor="#ccc" style="border-collapse:collapse;">
-    <thead>
-    <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Phone</th>
-    <th>Email</th>
-    </tr>
-    </thead>
-    <tbody>
-    <template for:each={contactData} for:item="conItem">
-    <tr key={conItem.Id}>
-    <td>{conItem.FirstName}</td>
-    <td>{conItem.LastName}</td>
-    <td>{conItem.Phone}</td>
-    <td>{conItem.Email}</td>
-    </tr>
-    </template>
-    </tbody>
-    </table>
-    </template>
-    <template if:false={contactData}>
-        <h3><strong><span style="color:brown;">{errorMsg}</span></strong></h3><br/>
-    </template>
+</div>
+<template if:true={contactData}>
+    <div class="slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+        <lightning-layout multiple-rows>
+            <template for:each={contactData} for:item="item" for:index="index">
+                <lightning-layout-item key={item.Id} size="12" small-device-size="6" medium-device-size="4" large-device-size="3" padding="around-small">
+                    <div class="flip-card">
+                        <div  class="flip-card-inner" key={item.Id} data-row-index={item.Id} data-id={item.Id} onmouseover={addClass} onmouseout={removeClass}>
+                            <div class="flip-card-front">
+                                <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" style="width:200px;height:200px;">
+                                <div class="slds-text-color_destructive">{item.Name}</div>
+                            </div>
+                            <div class="flip-card-back">
+                               <p class="slds-p-around_x-small"><text class="slds-text-title_caps" style="text-align: center;">{item.Name}</text></p>
+                                <p class="slds-p-around_x-small">Name: {item.Name}</p>
+                                <p class="slds-p-around_x-small">Email: {item.Email}</p>
+                                <p class="slds-p-around_x-small">Phone: {item.Phone}</p>
+                            </div>
+                        </div>
+                    </div> 
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
     </div>
+</template>
     <br/><br/>
     </lightning-card>
     </template>
