@@ -1,3 +1,4 @@
+
 <template>
     <lightning-card title="Enter the Contact Name/Email/Phone Number/Job Role" custom-icon="custom:icon13">
     <div class="slds slds-p-horizontal--medium">
@@ -26,7 +27,7 @@
                                 <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" style="width:200px;height:200px;">
                                 <div class="slds-text-color_destructive">{item.Name}</div>
                             </div>
-                            <div class="flip-card-back">
+                            <div class="flip-card-back" value = {item.id}>
                                <p class="slds-p-around_x-small"><text class="slds-text-title_caps" style="text-align: center;">{item.Name}</text></p>
                                 <p class="slds-p-around_x-small">Name: {item.Name}</p>
                                 <p class="slds-p-around_x-small">Email: {item.Email}</p>
@@ -34,10 +35,22 @@
                             </div>
                         </div>
                     </div> 
+                    <br><br>
+                    <lightning-Input type="radio" value={item.Id} name="selectVal" onclick={handleRadio}></lightning-input>
+
                 </lightning-layout-item>
             </template>
+
+    <!-- 
+         <lightning-radio-group 
+         key={q.id} 
+         options={q.answers} 
+         value={q.answers} 
+         onchange={handleChange} 
+         type="radio"></lightning-radio-group>  -->
         </lightning-layout>
     </div>
+    <p if:true= {isSelected}> You Have selected this contact {selectedVal} </p>
 </template>
     <br/><br/>
     </lightning-card>

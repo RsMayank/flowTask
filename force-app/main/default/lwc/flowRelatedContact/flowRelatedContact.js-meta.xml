@@ -8,6 +8,7 @@
    <targetConfigs>
        <targetConfig targets="lightning__FlowScreen">
         <property name="recordId" type="String" label="RecordId" description="Assigning RecordId"/>
+        <property name="outputTest" type="String" role="outputOnly"/>
        </targetConfig>
    </targetConfigs>
 </LightningComponentBundle>
