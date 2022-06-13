@@ -14,4 +14,12 @@ public with sharing class searchRelatedContacts {
         List<Contact> contactList = [Select id, Name, FirstName, LastName, Phone, email, Account.Name From Contact Where AccountId=:recordID limit 20];
         return contactList;
     }
-}
+
+    @AuraEnabled(cacheable = true)
+    public static List<Contact> returnCon(string keyVal)
+    {
+
+        List<Contact> contactList = [Select id, Name, FirstName, LastName, Phone, email, Account.Name From Contact Where id=:keyVal limit 20];
+            return contactList;
+        }
+    }

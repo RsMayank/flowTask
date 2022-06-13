@@ -1,8 +1,10 @@
 import { LightningElement, track, wire, api} from 'lwc';
 import retrieveContacts from '@salesforce/apex/searchRelatedContacts.retrieveContacts';
+import returnCon from '@salesforce/apex/searchRelatedContacts.returnCon';
 import retrieveContactData from '@salesforce/apex/searchRelatedContacts.retrieveContactData';
 import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 import StockKeepingUnit from '@salesforce/schema/Product2.StockKeepingUnit';
+import { CurrentPageReference } from "lightning/navigation";
 
 export default class FlowRelatedContact extends LightningElement {
     @api recordId ='0015j000007zxNoAAI';
@@ -10,8 +12,11 @@ export default class FlowRelatedContact extends LightningElement {
     @track contactData;
     @track errorMsg = '';
     @api outputTest;
-    @track selectedVal;
+    @api selectedVal;
+    @api toFlow;
+    @api toFlow1;
     @track isSelected = false;
+    @api contactURL;
     handleChangeAccName(event)
     {
         this.searchVal = event.target.value;    
@@ -27,18 +32,40 @@ export default class FlowRelatedContact extends LightningElement {
         });
 
     }
-
-
+    findSelectedVal()
+    {
+        returnCon({keyVal : this.toFlow})
+        .then(result =>{
+            this.selectedVal = result;
+        })
+        .catch(error =>{
+            this.errorMsg = error;
+        });
+        
+    }
+    handleURL() {
+        // Navigate to Account record page
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                "recordId": this.recordId,
+                "objectApiName": "Account",
+                "actionName": "view"
+            },
+        });
+    }
     handleRadio(event)
     {
-        //No NaN
-        console.log("Helllllooooooo!!!!!!!!");
-        this.selectedVal = event.target.value;
-        console.log(this.selectedVal);
+        this.toFlow = event.target.value;
+        console.log(this.toFlow);
         this.isSelected = true;
+        this.toFlow1 = this.toFlow;
 
-        this.dispatchEvent(new FlowAttributeChangeEvent('outputValue', this.selectedVal));
+        this.dispatchEvent(new FlowAttributeChangeEvent('outputTest', this.toFlow1));
 
+        this.findSelectedVal();
+        
+        
     }
     // const attributeChangeEvent = new FlowAttributeChangeEvent('outputTest', this.selectedVal);
     // this.dispatchEvent(attributeChangeEvent); 

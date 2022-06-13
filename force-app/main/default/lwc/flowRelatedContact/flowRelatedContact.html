@@ -21,22 +21,27 @@
         <lightning-layout multiple-rows>
             <template for:each={contactData} for:item="item" for:index="index">
                 <lightning-layout-item key={item.Id} size="12" small-device-size="6" medium-device-size="4" large-device-size="3" padding="around-small">
+                    <!-- <a onclick={handleRadio} value ={item.id}> -->
                     <div class="flip-card">
                         <div  class="flip-card-inner" key={item.Id} data-row-index={item.Id} data-id={item.Id} onmouseover={addClass} onmouseout={removeClass}>
                             <div class="flip-card-front">
                                 <img src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar" style="width:200px;height:200px;">
                                 <div class="slds-text-color_destructive">{item.Name}</div>
                             </div>
+                            
                             <div class="flip-card-back" value = {item.id}>
+
                                <p class="slds-p-around_x-small"><text class="slds-text-title_caps" style="text-align: center;">{item.Name}</text></p>
                                 <p class="slds-p-around_x-small">Name: {item.Name}</p>
                                 <p class="slds-p-around_x-small">Email: {item.Email}</p>
                                 <p class="slds-p-around_x-small">Phone: {item.Phone}</p>
                             </div>
+                            
                         </div>
                     </div> 
+                    <!-- </a> -->
                     <br><br>
-                    <lightning-Input type="radio" value={item.Id} name="selectVal" onclick={handleRadio}></lightning-input>
+                    <lightning-Input type="radio" id={item.Id} value={item.Id} name="selectedVal" onclick={handleRadio} required></lightning-input>
 
                 </lightning-layout-item>
             </template>
@@ -50,8 +55,89 @@
          type="radio"></lightning-radio-group>  -->
         </lightning-layout>
     </div>
-    <p if:true= {isSelected}> You Have selected this contact {selectedVal} </p>
 </template>
+    <template if:true= {selectedVal}>
+        <!-- <p>inside true function</p> -->
+        <div for:each={selectedVal} for:item="conItem" key={selectedVal.Id}>
+        <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+        <article class="slds-card" key={conItem.id}>
+            <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+            <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+            </svg>
+            <span class="slds-assistive-text">contact</span>
+            </span>
+            </div>
+            <div class="slds-media__body">
+            <h2 class="slds-card__header-title">
+            <a href="#" class="slds-card__header-link slds-truncate" title="Contacts">
+            <span>Selected Contact</span>
+            </a>
+            </h2>
+            </div>
+            </header>
+            </div>
+            <div class="slds-card__body">
+            <table class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-table_fixed-layout" role="grid" aria-label="Example table in a Card">
+            <thead>
+            <tr class="slds-line-height_reset">
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Name">Name</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Account">Account Name</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Id">Contact Id</div>
+            </th>
+            <th class="" scope="col">
+            <div class="slds-truncate" title="Email">Email</div>
+            </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="slds-hint-parent">
+            <th scope="row">
+            <div class="slds-truncate" title="Amy Choi">
+            <div  tabindex="-1">{conItem.Name}</div>
+            </div>
+            </th>
+            <td role="gridcell">
+            <div class="slds-truncate" title="Company One">{conItem.Account.Name}</div>
+            </td>
+            <td role="gridcell">
+            <div class="slds-truncate" title="conId"> {conItem.Id}</div>
+            </td>
+            <td role="gridcell">
+            <div class="slds-truncate" title="adam@company.com">{conItem.Email}</div>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            <footer class="slds-card__footer">
+            </footer>
+        </article>
+
+
+
+
+        <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+                <!-- <p> Details of Selected Contact</p>
+                <p>Name : {itemVal.Name}</p>
+                <p>Email : {itemVal.Email}</p>
+                <p>Id : {itemVal.Id}</p>
+                <p> Account : {itemVal.Account.Name}</p> -->
+        </div>
+    </template>
+    <template if:false={selectedVal}><p>Nothing Returned from the Backend: Error</p></template>
+
+        <!-- 
+        </template> -->
+     <!--//////////////////////////////////////////////////////////////////////////////////-->
     <br/><br/>
     </lightning-card>
-    </template>
+</template>
