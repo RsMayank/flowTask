@@ -14,9 +14,27 @@ export default class FlowRelatedContact extends LightningElement {
     @api outputTest;
     @api selectedVal;
     @api toFlow;
-    @api toFlow1;
+    @api toFlow1 = null;
     @track isSelected = false;
     @api contactURL;
+    @api invalidMsg = 'Please select any Contact';
+
+
+    @api
+        validate() {
+    if(this.toFlow1 != null) { 
+        return { isValid: true }; 
+    } 
+    else { 
+        // If the component is invalid, return the isValid parameter 
+        // as false and return an error message. 
+        return { 
+            isValid: false, 
+            errorMessage: this.invalidMsg
+         }; 
+     }
+}
+
     handleChangeAccName(event)
     {
         this.searchVal = event.target.value;    

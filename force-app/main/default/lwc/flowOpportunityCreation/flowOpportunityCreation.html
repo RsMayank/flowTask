@@ -1,0 +1,36 @@
+<template>
+  <lightning-record-edit-form object-api-name={opportunity_obj}>
+      <lightning-messages></lightning-messages>
+      <div class="slds-grid">
+          <div class="slds-col slds-size_2-of-2">
+              <lightning-input-field field-name={OpportunityName_field} onchange={handleNameChange}></lightning-input-field>
+              <lightning-input-field field-name={CloseDate_field} onchange={handleCloseDateChange}></lightning-input-field>
+              <lightning-input-field field-name={Amount_field} onchange={handleAmountChange}></lightning-input-field>
+              <lightning-input-field field-name={Type_field} onchange={handleTypeChange}></lightning-input-field>
+              <lightning-input-field field-name={StageName_field} onchange={handleStagechange}></lightning-input-field>
+              <lightning-input-field field-name={contactRole_field} onchange={handleConRoleChange}></lightning-input-field>
+              <lightning-input-field field-name={contact_ID} value={contactID}></lightning-input-field>
+
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+          </div>
+       </div>
+       <!-- <lightning-button
+       label="Go Back"
+       title="Back to previous Screen"
+       onclick={handleGoBack}>   </lightning-button> -->
+
+  </lightning-record-edit-form>
+  <lightning-record-edit-form object-api-name={opportunityCR_obj}>
+    <div class="slds-grid">
+        <div class="slds-col slds-size_2-of-2">
+            <lightning-input-field field-name={contactRole_field} onchange={handleConRoleChange}></lightning-input-field>
+            <lightning-input-field field-name={contact_ID} value={contactID}></lightning-input-field>
+
+        </div>
+     </div>
+
+</lightning-record-edit-form>
+
+<lightning-button type="submit" variant="brand" label="Create Opportunity" onclick={createOpportunity}></lightning-button>
+</template>
