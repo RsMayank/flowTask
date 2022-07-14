@@ -17,6 +17,7 @@ export default class FlowRelatedContact extends LightningElement {
     @api toFlow1 = null;
     @track isSelected = false;
     @api contactURL;
+    @track backendMsg='';
     @api invalidMsg = 'Please select any Contact';
 
 
@@ -58,6 +59,7 @@ export default class FlowRelatedContact extends LightningElement {
         })
         .catch(error =>{
             this.errorMsg = error;
+            this.backendMsg = this.errorMsg; 
         });
         
     }
